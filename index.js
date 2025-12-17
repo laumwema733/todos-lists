@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = createElement(task);
       listItems.appendChild(li);
     }
-
+    loadFromLocalStorage();
     tracker();
   }
   renderTasks();
