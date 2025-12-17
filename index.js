@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = createElement(task);
       listItems.appendChild(li);
     }
-    loadFromLocalStorage();
+    saveLocalStorage();
     tracker();
   }
   renderTasks();
@@ -113,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //   remove task
     li.querySelector(".btn-delete").addEventListener("click", () => {
       removeTask(task.id);
-
       renderTasks();
     });
 
@@ -131,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!task.isCompleted) {
         inputValue.value = task.text;
         removeTask(task.id);
-        saveLocalStorage();
+        renderTasks();
       }
     });
 
@@ -142,13 +141,13 @@ document.addEventListener("DOMContentLoaded", () => {
     checkbox.addEventListener("change", () => {
       task.isCompleted = checkbox.checked;
       // hide/show editing button
-      renderTasks();
-      tracker();
-      saveLocalStorage();
+
       if (checkbox.checked) {
         li.querySelector(".btn-edit").classList.add("hidden");
+        renderTasks();
       } else {
         li.querySelector(".btn-edit").classList.remove("hidden");
+        renderTasks();
       }
     });
 
