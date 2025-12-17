@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // tracking tasks
   function tracker() {
-    if (tasks.length === 0) {
-      progressBar.classList.add("hidden");
-      document.querySelector(".progress-result").classList.add("hidden");
-    } else {
-      progressBar.classList.remove("hidden");
-      document.querySelector(".progress-result").classList.remove("hidden");
-    }
+    // if (tasks.length === 0) {
+    //   progressBar.classList.add("hidden");
+    //   document.querySelector(".progress-result").classList.add("hidden");
+    // } else {
+    //   progressBar.classList.remove("hidden");
+    //   document.querySelector(".progress-result").classList.remove("hidden");
+    // }
 
     const taskCompleted = tasks.filter((ts) => ts.isCompleted === true).length;
     progressBar.style.width = `${(taskCompleted * 100) / tasks.length}%`;
