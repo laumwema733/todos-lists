@@ -16,6 +16,47 @@ body {
   background-size: cover;
   box-sizing: border-box;
 }
+.tracker {
+  border: 4px solid rgba(255, 255, 255, 0.23);
+  padding: 20px 15px;
+  font-size: 1.6rem;
+  margin-bottom: 40px;
+}
+.tracker h2 {
+  text-align: center;
+  font-size: 3.4rem;
+  color: #ffe8cc;
+}
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+.progress-result {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #ffe8cc;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+}
+.progress {
+  height: 3px;
+  width: 100%;
+  border: 4px solid rgba(255, 255, 255, 0.23);
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #ffe8cc;
+  margin-top: 20px;
+}
+.progress--bar {
+  border: 3px solid red;
+  border-radius: 20px;
+}
+
 .container {
   max-width: 100%;
   width: 372px;
@@ -26,6 +67,7 @@ body {
   border-radius: 10px;
   position: relative;
 }
+
 input[type="checkbox"]:checked + span {
   text-decoration: line-through;
   text-decoration-thickness: 4px;

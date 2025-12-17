@@ -3,12 +3,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputValue = document.querySelector("#input-el");
   const addBtn = document.querySelector("#btn-add");
   const listItems = document.querySelector("#list-items");
+  const progressBar = document.querySelector(".progress--bar");
+  const taskDone = document.querySelector(".task--done");
+  const allTask = document.querySelector(".all--task");
 
   // let tasks = [{ text: "cooking", isCompleted: false, id: 1 }];
   let tasks = [];
   loadFromLocalStorage();
+
   function saveLocalStorage() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  // tracking tasks
+  function tracker() {
+    if (tasks.length === 0) {
+      progressBar.classList.add("hidden");
+      document.querySelector(".progress-result").classList.add("hidden");
+    } else {
+      progressBar.classList.remove("hidden");
+      document.querySelector(".progress-result").classList.remove("hidden");
+    }
+
+    const taskCompleted = tasks.filter((ts) => ts.isCompleted === true).length;
+    progressBar.style.width = `${(taskCompleted * 100) / tasks.length}%`;
+    allTask.textContent = tasks.length;
+    taskDone.textContent = +taskCompleted;
+
+    taskCompleted > 0 && taskCompleted === tasks.length ? celebrate() : "";
   }
   // render task
 
@@ -38,6 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderTasks();
     saveLocalStorage();
+    tracker();
+
     inputValue.value = "";
     console.log(tasks);
   }
@@ -84,6 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //   remove task
     li.querySelector(".btn-delete").addEventListener("click", () => {
       removeTask(task.id);
+      tracker();
+      renderTasks();
     });
 
     //   Edit
@@ -111,7 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
     checkbox.addEventListener("change", () => {
       task.isCompleted = checkbox.checked;
       // hide/show editing button
-
+      renderTasks();
+      tracker();
       if (checkbox.checked) {
         li.querySelector(".btn-edit").classList.add("hidden");
       } else {
@@ -126,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function removeTask(id) {
     tasks = tasks.filter((task) => task.id !== id);
-    renderTasks();
     saveLocalStorage();
+    renderTasks();
   }
 
   function loadFromLocalStorage() {
@@ -137,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
         tasks = parsed;
+        tracker();
       }
     } catch {
       tasks = [];
@@ -150,4 +178,46 @@ document.addEventListener("DOMContentLoaded", () => {
       addTask(e);
     }
   });
+
+  function celebrate() {
+    const count = 200,
+      defaults = {
+        origin: { y: 0.7 },
+      };
+
+    function fire(particleRatio, opts) {
+      confetti(
+        Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio),
+        })
+      );
+    }
+
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+
+    fire(0.2, {
+      spread: 60,
+    });
+
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+  }
 });

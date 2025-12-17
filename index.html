@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <!-- <script src="app.js" defer></script> -->
-    <script src="index.js" defer></script>
+
     <title>Todos List</title>
   </head>
   <body>
     <div class="container">
-      <h1 id="title">Todos List</h1>
+      <header>
+        <h1 id="title">Todos List</h1>
+        <div class="tracker">
+          <h2>tracker</h2>
+          <div class="progress-container">
+            <div class="progress">
+              <div class="progress--bar"></div>
+            </div>
+            <p class="progress-result">
+              <span class="task--done">3</span>/<span class="all--task">3</span>
+            </p>
+          </div>
+        </div>
+      </header>
       <form id="form">
         <input type="text" placeholder="Enter your Task..." id="input-el" />
         <button type="submit" aria-label="submit task" id="btn-add">Add</button>
@@ -19,5 +32,7 @@
         <ul id="list-items"></ul>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
