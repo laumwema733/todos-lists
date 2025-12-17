@@ -88,7 +88,7 @@ li input[type="checkbox"] {
   height: 20px;
   appearance: none;
   outline: 3px solid #e599f7;
-
+  cursor: pointer;
   border-radius: 50%;
 }
 li input[type="checkbox"]:checked {
