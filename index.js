@@ -30,7 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     allTask.textContent = tasks.length;
     taskDone.textContent = +taskCompleted;
 
-    taskCompleted > 0 && taskCompleted === tasks.length ? celebrate() : "";
+    taskCompleted > 0 &&
+    taskCompleted === tasks.length &&
+    inputValue.value === ""
+      ? celebrate()
+      : "";
   }
   // render task
 
@@ -43,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = createElement(task);
       listItems.appendChild(li);
     }
+
+    tracker();
   }
   renderTasks();
 
@@ -60,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderTasks();
     saveLocalStorage();
-    tracker();
 
     inputValue.value = "";
     console.log(tasks);
@@ -108,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //   remove task
     li.querySelector(".btn-delete").addEventListener("click", () => {
       removeTask(task.id);
-      tracker();
+
       renderTasks();
     });
 
@@ -139,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // hide/show editing button
       renderTasks();
       tracker();
+      saveLocalStorage();
       if (checkbox.checked) {
         li.querySelector(".btn-edit").classList.add("hidden");
       } else {
